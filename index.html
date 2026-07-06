@@ -260,6 +260,15 @@
     margin-left:6px;
     letter-spacing:0;
   }
+  .field label .optional-tag{
+    font-family:'Mukta', sans-serif;
+    text-transform:none;
+    font-weight:500;
+    font-size:0.7rem;
+    color:#a68a5c;
+    letter-spacing:0;
+    margin-left:4px;
+  }
 
   .input-shell{
     display:flex;
@@ -541,9 +550,17 @@
         <div class="error-msg" id="phoneError"></div>
       </div>
 
+      <div class="field">
+        <label for="city">City <span class="hi">शहर</span> <span class="optional-tag">(optional / वैकल्पिक)</span></label>
+        <div class="input-shell">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a6d3b" stroke-width="2"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <input type="text" id="city" name="city" placeholder="अपने शहर का नाम लिखें" autocomplete="address-level2">
+        </div>
+      </div>
+
       <button type="submit" class="submit-btn" id="submitBtn">
         <svg class="flame" viewBox="0 0 24 24" fill="#c9962e"><path d="M12 2c1.5 3-2 4.5-2 8a4 4 0 0 0 8 0c0-1-0.4-2-1-3 1.8 1 3 3.1 3 5.5A6 6 0 0 1 6 12.5C6 8 9 5 12 2z"/></svg>
-        <span class="btn-en">Receive Blessings</span>
+        <span class="btn-en">Submit</span>
         <span class="btn-hi">— आशीर्वाद प्राप्त करें</span>
       </button>
 
@@ -561,7 +578,7 @@
     </div>
   </div>
 
-  <footer>GIEO GITA · Kurukshetra &amp; UK Chapter · श्री कृष्ण कृपा</footer>
+  <footer>GIEO GITA · Kurukshetra &amp;  · श्री कृष्ण कृपा</footer>
 </div>
 
 <div class="petals" id="petals"></div>
@@ -569,12 +586,13 @@
 <script>
   // ===== CONFIGURE THIS =====
   // Paste your Google Apps Script Web App URL below (see setup notes provided separately).
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxRzvf-gJpXwlD-fcrefsQqa5sNYp34uZymvACr04Xh_P2AshcJ3DgND8glIX6jZLRI/exec";
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxl5Prvhy4V2P9HQ3k24Z54Ca0lHuoZ3buWq1kovsPeO2T_tDJ2MW68R3s4-cwok5oi/exec";
   // ===========================
 
   const form = document.getElementById('blessingForm');
   const nameInput = document.getElementById('name');
   const phoneInput = document.getElementById('phone');
+  const cityInput = document.getElementById('city');
   const nameError = document.getElementById('nameError');
   const phoneError = document.getElementById('phoneError');
   const submitBtn = document.getElementById('submitBtn');
@@ -627,6 +645,7 @@
     const payload = new URLSearchParams();
     payload.append('name', nameInput.value.trim());
     payload.append('phone', phoneInput.value.trim());
+    payload.append('city', cityInput.value.trim());
 
     try{
       if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.startsWith('http')){
